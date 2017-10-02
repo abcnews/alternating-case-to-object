@@ -5,7 +5,7 @@ module.exports = function(string) {
 
   var o = {};
 
-  config.forEach(match => {
+  config.forEach(function (match) {
     var pairs = match.match(/([A-Z]+)([0-9a-z]+)/);
     var key = pairs[1].toLowerCase();
     var value = pairs[2];
