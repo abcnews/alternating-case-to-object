@@ -10,12 +10,8 @@
     "type": "git",
     "url": "git+ssh://git@github.com/abcnews/alternating-case-to-object.git"
   },
-  "keywords": [
-    "string",
-    "object",
-    "case"
-  ],
-  "author": "Nathan Hoad",
+  "keywords": ["string", "object", "case"],
+  "contributors": ["Colin Gourlay <Hoad.Nathan@abc.net.au>", "Nathan Hoad <Gourlay.Colin@abc.net.au>"],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/abcnews/alternating-case-to-object/issues"
