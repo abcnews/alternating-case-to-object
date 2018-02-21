@@ -1,14 +1,36 @@
-module.exports = function(string) {
+module.exports = function(string, options) {
   var config = string.match(/[A-Z]+[0-9a-z]+/g);
 
-  if (!config) return {};
+  if (typeof options !== 'object') {
+    options = {};
+  }
+
+  if (typeof options.propMap !== 'object') {
+    options.propMap = {};
+  }
 
   var o = {};
 
-  config.forEach(function (match) {
+  if (typeof options.arrayProps === 'string') {
+    options.arrayProps = [options.arrayProps];
+  } else if (!Array.isArray(options.arrayProps)) {
+    options.arrayProps = [];
+  }
+
+  // Initialise arrays, accounting for mapped props in arrayProps
+  options.arrayProps.forEach(function(prop) {
+    o[options.propMap[prop] || prop] = [];
+  });
+
+  // Exit early if possible, with any empty arrays defined in arrayProps
+  if (!config) return o;
+
+  config.forEach(function(match) {
     var pairs = match.match(/([A-Z]+)([0-9a-z]+)/);
-    var key = pairs[1].toLowerCase();
+    var prop = pairs[1].toLowerCase();
     var value = pairs[2];
+
+    prop = options.propMap[prop] || prop;
 
     // Do some type guessing
     if (parseFloat(value).toString() === value) {
@@ -19,14 +41,14 @@ module.exports = function(string) {
       value = false;
     }
 
-    if (o[key]) {
-      // Key exists so treat it as a list
-      if (!(o[key] instanceof Array)) {
-        o[key] = [o[key]];
+    if (o[prop]) {
+      // Prop exists so assume it should be an array
+      if (!Array.isArray(o[prop])) {
+        o[prop] = [o[prop]];
       }
-      o[key].push(value);
+      o[prop].push(value);
     } else {
-      o[key] = value;
+      o[prop] = value;
     }
   });
 
