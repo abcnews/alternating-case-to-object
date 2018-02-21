@@ -1,6 +1,6 @@
 {
-  "name": "alternating-case-to-object",
-  "version": "1.1.0",
+  "name": "@abcnews/alternating-case-to-object",
+  "version": "2.0.0",
   "description": "Convert an alternating case string to a JSON object",
   "main": "index.js",
   "scripts": {
@@ -10,8 +10,15 @@
     "type": "git",
     "url": "git+ssh://git@github.com/abcnews/alternating-case-to-object.git"
   },
-  "keywords": ["string", "object", "case"],
-  "contributors": ["Colin Gourlay <Hoad.Nathan@abc.net.au>", "Nathan Hoad <Gourlay.Colin@abc.net.au>"],
+  "keywords": [
+    "string",
+    "object",
+    "case"
+  ],
+  "contributors": [
+    "Nathan Hoad <Hoad.Nathan@abc.net.au>",
+    "Colin Gourlay <Gourlay.Colin@abc.net.au>"
+  ],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/abcnews/alternating-case-to-object/issues"
