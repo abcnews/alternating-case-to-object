@@ -1,5 +1,5 @@
 module.exports = function(string, options) {
-  var config = string.match(/[A-Z]+[0-9a-z]+/g);
+  var config = string.match(/[A-Z]+([0-9a-z]|$)+/g);
 
   if (typeof options !== 'object') {
     options = {};
@@ -26,7 +26,7 @@ module.exports = function(string, options) {
   if (!config) return o;
 
   config.forEach(function(match) {
-    var pairs = match.match(/([A-Z]+)([0-9a-z]+)/);
+    var pairs = match.match(/([A-Z]+)(([0-9a-z]|$)+)/);
     var prop = pairs[1].toLowerCase();
     var value = pairs[2];
 
@@ -39,6 +39,8 @@ module.exports = function(string, options) {
       value = true;
     } else if (value === 'false' || value === 'no') {
       value = false;
+    } else if (value === '') {
+      value = null;
     }
 
     if (o[prop]) {
