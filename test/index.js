@@ -10,6 +10,15 @@ test('it can read basic config', t => {
   t.is(config.second, 'thing');
 });
 
+test('it handles empty values in the last property', t => {
+  const config = alternatingCaseToObject('FIRSTvalueEMPTY');
+  
+  t.is(typeof config, 'object');
+  t.is(config.first, 'value');
+  t.is(config.empty, null);
+});
+
+
 test('it can group multiple keys', t => {
   const config = alternatingCaseToObject('GROUPfirstGROUPsecondGROUPthird');
 
