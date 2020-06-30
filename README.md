@@ -4,8 +4,12 @@ A function to convert ALTERNATINGcase strings to objects.
 
 ## Usage
 
+```sh
+npm i @abcnews/alternating-case-to-object
+```
+
 ```javascript
-const alternatingCaseToObject = require('alternating-case-to-object');
+const alternatingCaseToObject = require('@abcnews/alternating-case-to-object');
 
 alternatingCaseToObject('PROPvalueSECONDthingALLOWEDyesTHINGS100');
 
