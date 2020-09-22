@@ -14,9 +14,9 @@ type ACTOOptions = {
   arrayProps?: string[] | string;
 };
 
-module.exports = function(
+export default function(
   string: string,
-  { propMap = {}, arrayProps = [] }: ACTOOptions
+  { propMap = {}, arrayProps = [] }: ACTOOptions = {}
 ): ACTOObject {
   const config = string.match(/[A-Z]+([0-9a-z]|$)+/g);
 
@@ -57,7 +57,7 @@ module.exports = function(
 
     let propVal = o[prop];
 
-    if (propVal !== null) {
+    if (propVal !== undefined) {
       // Prop exists so assume it should be an array
       if (!Array.isArray(propVal)) {
         propVal = [propVal];
@@ -70,4 +70,4 @@ module.exports = function(
   });
 
   return o;
-};
+}
