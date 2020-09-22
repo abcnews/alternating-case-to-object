@@ -1,6 +1,5 @@
 const test = require('ava');
-
-const alternatingCaseToObject = require('..');
+const alternatingCaseToObject = require('../src/index');
 
 test('it can read basic config', t => {
   const config = alternatingCaseToObject('FIRSTvalueSECONDthing');
@@ -12,12 +11,11 @@ test('it can read basic config', t => {
 
 test('it handles empty values in the last property', t => {
   const config = alternatingCaseToObject('FIRSTvalueEMPTY');
-  
+
   t.is(typeof config, 'object');
   t.is(config.first, 'value');
   t.is(config.empty, null);
 });
-
 
 test('it can group multiple keys', t => {
   const config = alternatingCaseToObject('GROUPfirstGROUPsecondGROUPthird');
@@ -36,15 +34,18 @@ test('it can do some basic type guessing', t => {
 });
 
 test('it can map props', t => {
-  const config = alternatingCaseToObject('KEBABCASE1SNAKECASE2CAMELCASE3PASCALCASE4DIFFERENT5', {
-    propMap: {
-      kebabcase: 'kebab-case',
-      snakecase: 'snake_case',
-      camelcase: 'camelCase',
-      pascalcase: 'PascalCase',
-      different: 'entirely'
+  const config = alternatingCaseToObject(
+    'KEBABCASE1SNAKECASE2CAMELCASE3PASCALCASE4DIFFERENT5',
+    {
+      propMap: {
+        kebabcase: 'kebab-case',
+        snakecase: 'snake_case',
+        camelcase: 'camelCase',
+        pascalcase: 'PascalCase',
+        different: 'entirely',
+      },
     }
-  });
+  );
 
   t.is(config['kebab-case'], 1);
   t.is(config.snake_case, 2);
@@ -56,7 +57,7 @@ test('it can map props', t => {
 
 test('it can ensure arrays are returned for props which appear zero-or-more times', t => {
   const options = {
-    arrayProps: ['list']
+    arrayProps: ['list'],
   };
   const configEmpty = alternatingCaseToObject('', options);
   const configZero = alternatingCaseToObject('NOTEMPTYtrue', options);
@@ -76,7 +77,7 @@ test('it can ensure arrays are returned for props which appear zero-or-more time
 
 test('it allows arrayProps to be a string (representing a single prop)', t => {
   const config = alternatingCaseToObject('LIST1LIST2LIST3', {
-    arrayProps: 'list'
+    arrayProps: 'list',
   });
 
   t.true(Array.isArray(config.list));
@@ -87,8 +88,8 @@ test('it allows arrayProps to contain props in propMap', t => {
   const config = alternatingCaseToObject('LIST1LIST2LIST3', {
     arrayProps: 'things',
     propMap: {
-      list: 'things'
-    }
+      list: 'things',
+    },
   });
 
   t.true(Array.isArray(config.things));
