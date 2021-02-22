@@ -70,7 +70,6 @@ export default function(
           );
           if (vals.length !== allKeyValues.length) throw err;
           obj[key] = vals;
-          return obj;
         }
 
         if (typeof value === 'number') {
@@ -79,7 +78,6 @@ export default function(
           );
           if (vals.length !== allKeyValues.length) throw err;
           obj[key] = vals;
-          return obj;
         }
 
         if (typeof value === 'boolean') {
@@ -88,10 +86,11 @@ export default function(
           );
           if (vals.length !== allKeyValues.length) throw err;
           obj[key] = vals;
-          return obj;
         }
+      } else {
+        obj[key] = value;
       }
-      obj[key] = value;
+
       return obj;
     }, {} as ACTOObject);
 
