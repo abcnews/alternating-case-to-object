@@ -96,3 +96,8 @@ test('it allows arrayProps to contain props in propMap', () => {
   expect(Array.isArray(config.things)).toBe(true);
   expect(Array.isArray(config.things) && config.things.length).toBe(3);
 });
+
+test('it throws an error when an array prop has differing types', () => {
+  const throws = () => alternatingCaseToObject('LIST1LISTtwo');
+  expect(throws).toThrow();
+});
