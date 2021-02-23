@@ -25,9 +25,9 @@ alternatingCaseToObject('PROPvalueSECONDthingALLOWEDyesTHINGS100');
 
 #### Automatic type inference
 
-* Number values will be parsed as floats.
-* The values `"true"`, `"yes"`, `"false"` & `"no"` will be converted to the booleans `true`, `true`, `false` & `false`, respectively.
-* If a prop appears more than once, multiple values will be returned as an array:
+- Number values will be parsed as floats.
+- The values `"true"`, `"yes"`, `"false"` & `"no"` will be converted to the booleans `true`, `true`, `false` & `false`, respectively.
+- If a prop appears more than once, multiple values will be returned as an array:
 
 ```javascript
 alternatingCaseToObject('GROUPfirstGROUPsecondGROUPthird');
@@ -39,6 +39,12 @@ alternatingCaseToObject('GROUPfirstGROUPsecondGROUPthird');
 }
 ```
 
+Every value in a prop which appears multiple times must be of the same type or an exception will be thrown. For example, this will throw:
+
+```javascript
+alternatingCaseToObject('AtrueAstr');
+```
+
 ### Options
 
 You can pass an object as a second argument, defining one or more options:
@@ -48,14 +54,14 @@ You can pass an object as a second argument, defining one or more options:
 Props in this array will always be returned as arrays, even if they occur in the config string zero or one time.
 
 ```javascript
-alternatingCaseToObject('AtrueA100BvalueAvalueDvalue', {
+alternatingCaseToObject('AtrueAfalseBvalueAtrueDvalue', {
   arrayProps: ['a', 'b', 'c']
 });
 
 // >>>
 
 {
-  a: [true, 100, 'value'],
+  a: [true, false, true],
   b: ['value'],
   c: [],
   d: 'value'
