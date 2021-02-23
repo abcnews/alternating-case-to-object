@@ -1,6 +1,6 @@
 {
   "name": "@abcnews/alternating-case-to-object",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Convert an alternating case string to a JSON object",
   "contributors": [
     "Nathan Hoad <Hoad.Nathan@abc.net.au>",
