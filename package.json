@@ -24,7 +24,6 @@
     "lint": "tsdx lint",
     "prepare": "tsdx build && husky install",
     "size": "size-limit",
-    "analyze": "size-limit --why",
     "release": "np"
   },
   "prettier": {
@@ -37,11 +36,11 @@
   "size-limit": [
     {
       "path": "dist/alternating-case-to-object.cjs.production.min.js",
-      "limit": "10 KB"
+      "limit": "1 KB"
     },
     {
       "path": "dist/alternating-case-to-object.esm.js",
-      "limit": "10 KB"
+      "limit": "1 KB"
     }
   ],
   "repository": {
