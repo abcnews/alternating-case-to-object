@@ -34,6 +34,18 @@ test('it can do some basic type guessing', () => {
   expect(config.available === false).toBe(true);
 });
 
+test("it doesn't type guess values if we ask it not to", () => {
+  const config = alternatingCaseToObject(
+    'THINGS10ALLOWEDyesAVAILABLEfalseTHINGSA10ALLOWEDAyesAVAILABLEAfalseEMPTYA',
+    { noTypeGuessing: ['thingsa', 'alloweda', 'availablea', 'emptya'] }
+  );
+
+  expect(config.thingsa === '10').toBe(true);
+  expect(config.alloweda === 'yes').toBe(true);
+  expect(config.availablea === 'false').toBe(true);
+  expect(config.emptya === '').toBe(true);
+});
+
 test('it can map props', () => {
   const config = alternatingCaseToObject(
     'KEBABCASE1SNAKECASE2CAMELCASE3PASCALCASE4DIFFERENT5',
