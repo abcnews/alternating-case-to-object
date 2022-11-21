@@ -14,7 +14,7 @@ type ACTOOptions = {
   arrayProps?: string[] | string;
 };
 
-export default function(
+export default function (
   string: string,
   { propMap = {}, arrayProps = [] }: ACTOOptions = {}
 ): ACTOObject {
@@ -36,7 +36,7 @@ export default function(
       const key = propMap[keyStr.toLowerCase()] || keyStr.toLowerCase();
 
       // Do some type guessing
-      let value: ACTOPrimativeValue =
+      const value: ACTOPrimativeValue =
         parseFloat(valueStr).toString() === valueStr
           ? parseFloat(valueStr)
           : valueStr === 'true' || valueStr === 'yes'
@@ -55,7 +55,7 @@ export default function(
 
       const allKeyValues = arr
         .filter(({ key: k }) => k === key)
-        .map(d => d.value);
+        .map((d) => d.value);
 
       const makeArray = arrayProps.includes(key) || allKeyValues.length > 1;
 
@@ -94,7 +94,7 @@ export default function(
       return obj;
     }, {} as ACTOObject);
 
-  arrayProps.forEach(key => {
+  arrayProps.forEach((key) => {
     if (typeof result[key] === 'undefined') {
       result[key] = [];
     }

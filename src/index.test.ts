@@ -1,4 +1,6 @@
-import alternatingCaseToObject from '../src/index';
+import { expect, test } from '@jest/globals';
+
+import alternatingCaseToObject from './index';
 
 test('it can read basic config', () => {
   const config = alternatingCaseToObject('FIRSTvalueSECONDthing');
