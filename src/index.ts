@@ -12,18 +12,21 @@ type PropMap = {
 type ACTOOptions = {
   propMap?: PropMap;
   arrayProps?: string[] | string;
+  noTypeGuessing?: string[] | string;
 };
+
+const makeArray = (val: string | string[]) =>
+  typeof val === 'string' ? [val] : val;
 
 export default function (
   string: string,
-  { propMap = {}, arrayProps = [] }: ACTOOptions = {}
+  { propMap = {}, arrayProps = [], noTypeGuessing = [] }: ACTOOptions = {}
 ): ACTOObject {
   const config = string.match(/[A-Z]+([0-9a-z]|$)+/g) || [];
 
-  // Convert a string supplied for the arrayProps function to an array so we can treat consistently below
-  if (typeof arrayProps === 'string') {
-    arrayProps = [arrayProps];
-  }
+  // Convert a string to arrays for selected options.
+  arrayProps = makeArray(arrayProps);
+  noTypeGuessing = makeArray(noTypeGuessing);
 
   const result: ACTOObject = config
     .map((str: string) => {
@@ -36,16 +39,17 @@ export default function (
       const key = propMap[keyStr.toLowerCase()] || keyStr.toLowerCase();
 
       // Do some type guessing
-      const value: ACTOPrimativeValue =
-        parseFloat(valueStr).toString() === valueStr
-          ? parseFloat(valueStr)
-          : valueStr === 'true' || valueStr === 'yes'
-          ? true
-          : valueStr === 'false' || valueStr === 'no'
-          ? false
-          : valueStr === ''
-          ? null
-          : valueStr;
+      const value: ACTOPrimativeValue = noTypeGuessing.includes(key)
+        ? valueStr
+        : parseFloat(valueStr).toString() === valueStr
+        ? parseFloat(valueStr)
+        : valueStr === 'true' || valueStr === 'yes'
+        ? true
+        : valueStr === 'false' || valueStr === 'no'
+        ? false
+        : valueStr === ''
+        ? null
+        : valueStr;
 
       return { key, value };
     })
