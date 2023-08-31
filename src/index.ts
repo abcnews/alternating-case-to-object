@@ -18,7 +18,7 @@ type ACTOOptions = {
 const makeArray = (val: string | string[]) =>
   typeof val === 'string' ? [val] : val;
 
-export default function (
+export function alternatingCaseToObject(
   string: string,
   { propMap = {}, arrayProps = [], noTypeGuessing = [] }: ACTOOptions = {}
 ): ACTOObject {
@@ -106,3 +106,5 @@ export default function (
 
   return result;
 }
+
+export default alternatingCaseToObject;
