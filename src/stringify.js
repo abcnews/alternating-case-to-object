@@ -34,7 +34,7 @@ export default function stringify(obj, options = {}) {
     {}
   );
   return Object.entries(obj)
-    .filter(([_, value]) => typeof value !== 'undefined')
+    .filter(([, value]) => typeof value !== 'undefined')
     .flatMap(([keyStr, value]) => {
       const key = propMap[keyStr] || keyStr;
       const arrayValue = Array.isArray(value) ? value : [value];
