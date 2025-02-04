@@ -1,3 +1,4 @@
+/* global describe, it */
 import assert from 'assert';
 import stringify from '../src/stringify.js';
 import { propMap } from './constants.js';

@@ -1,6 +1,6 @@
 {
   // see https://www.typescriptlang.org/tsconfig to better understand tsconfigs
-  "include": ["src", "test"],
+  "include": ["src"],
   "compilerOptions": {
     "allowJs": true,
     "checkJs": true,
@@ -9,6 +9,7 @@
     "importHelpers": true,
     // output .d.ts declaration files for consumers
     "declaration": true,
+    "declarationMap": true,
     // output .js.map sourcemap files for consumers
     "sourceMap": true,
     // stricter type-checking for stronger correctness. Recommended by TS
@@ -29,7 +30,7 @@
     "skipLibCheck": true,
     // error out if import and file system have a casing mismatch. Recommended by TS
     "forceConsistentCasingInFileNames": true,
-    // `tsdx build` ignores this option, but it is commonly used when type-checking separately with `tsc`
-    "noEmit": true
+    // `tsdx build` ignores this option, but it is commonly used when type-checking separately with `tsc`,
+    "outDir": "dist"
   }
 }

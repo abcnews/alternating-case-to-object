@@ -1,3 +1,4 @@
+/* global describe, it */
 import assert from 'assert';
 import alternatingCaseToObject from '../src/parse.js';
 import { propMap } from './constants.js';

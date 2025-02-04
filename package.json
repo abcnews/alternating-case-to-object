@@ -9,18 +9,19 @@
     "Ash Kyd <Kyd.Ashley@abc.net.au>"
   ],
   "license": "ISC",
-  "main": "src/index.js",
-  "module": "src/index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "type": "module",
   "files": [
-    "src",
+    "dist",
     "README.md"
   ],
   "engines": {
     "node": ">=16"
   },
   "scripts": {
-    "build": "npx tsc src/parse.js --allowJs true --checkJs true --noEmit true",
+    "build": "npx tsc",
     "test": "mocha test/*.test.js",
     "lint": "eslint src",
     "size": "size-limit",
