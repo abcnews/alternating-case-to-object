@@ -2,14 +2,19 @@
  * @typedef {import('./types.js').ACTOObject} ACTOObject
  */
 
+import { makeArray } from './utils.js';
+
 /**
  * Strip unsafe string characters
  * @param {any} str
  */
-const safeString = (str) =>
-  String(str)
-    .toLowerCase()
-    .replace(/[^a-z0-9]/g, '');
+const safeString = (str) => {
+  const safeString = str.toLowerCase().replace(/[^a-z0-9]/g, '');
+  if (safeString !== str) {
+    throw new Error(`Illegal characters found: "${str}"`);
+  }
+  return str;
+};
 
 /**
  * Encode an object to ACTO string.
@@ -34,10 +39,12 @@ export default function stringify(obj, options = {}) {
     {}
   );
   return Object.entries(obj)
-    .filter(([, value]) => typeof value !== 'undefined')
     .flatMap(([keyStr, value]) => {
+      if (typeof value === 'undefined' || value === null) {
+        return [];
+      }
       const key = propMap[keyStr] || keyStr;
-      const arrayValue = Array.isArray(value) ? value : [value];
+      const arrayValue = makeArray(value);
       return arrayValue.map((thisValue) =>
         [safeString(key).toUpperCase(), safeString(thisValue)].join('')
       );

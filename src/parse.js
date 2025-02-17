@@ -4,11 +4,7 @@
  * @typedef {import('./types.js').ACTOPrimativeValue} ACTOPrimativeValue
  */
 
-/**
- * @param {string | string[]} val
- * @returns {string[]}
- */
-const makeArray = (val) => (typeof val === 'string' ? [val] : val);
+import { makeArray } from './utils.js';
 
 /**
  * @param {string} string - ACTO string to decode

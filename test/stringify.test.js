@@ -8,9 +8,8 @@ describe('stringify', () => {
     const res = stringify({ string: 'hello' });
     assert.equal(res, 'STRINGhello');
   });
-  it('should encode a string w spaces (lossy)', () => {
-    const res = stringify({ string: 'hello world' });
-    assert.equal(res, 'STRINGhelloworld');
+  it('should throw when a string contains unencodable characters', () => {
+    assert.throws(() => stringify({ string: 'hello world' }));
   });
   it('should encode a number', () => {
     const res = stringify({ num: 13 });
