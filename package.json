@@ -67,5 +67,8 @@
   "bugs": {
     "url": "https://github.com/abcnews/alternating-case-to-object/issues"
   },
-  "homepage": "https://github.com/abcnews/alternating-case-to-object#readme"
+  "homepage": "https://github.com/abcnews/alternating-case-to-object#readme",
+  "dependencies": {
+    "tslib": "^2.8.1"
+  }
 }
