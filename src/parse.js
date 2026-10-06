@@ -60,7 +60,16 @@ export default function parse(string, options = {}) {
         const isArray = arrayProps.includes(key) || allKeyValues.length > 1;
 
         if (isArray) {
-          const types = new Set(allKeyValues.map((val) => typeof val));
+          const types = new Set(
+						allKeyValues
+							// A null value here indicates a trailing uppercase key
+							// with no value. Previous valueStr === "" and presumably
+							// non-intentional. typeof null === "object" so will
+							// throw when in a Set with other strings. Let's filter
+							// instead of throwing.
+							.filter((val) => val !== null)
+							.map((val) => typeof val)
+          );
           if (types.size > 1) {
             throw new Error(`Inconsistent types in array property '${key}'`);
           }
