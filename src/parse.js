@@ -60,15 +60,15 @@ export default function parse(string, options = {}) {
         const isArray = arrayProps.includes(key) || allKeyValues.length > 1;
 
         if (isArray) {
-          const types = new Set(
+					const types = new Set(
 						allKeyValues
 							// A null means a trailing uppercase key with no value. `typeof null`
-              // is "object", so without filtering it reads as a type mismatch
-              // against any real value. A missing value shouldn't make an array
-              // inconsistent.
+							// is "object", so without filtering it reads as a type mismatch
+							// against any real value. A missing value shouldn't make an array
+							// inconsistent.
 							.filter((val) => val !== null)
 							.map((val) => typeof val)
-          );
+					);
           if (types.size > 1) {
             throw new Error(`Inconsistent types in array property '${key}'`);
           }
