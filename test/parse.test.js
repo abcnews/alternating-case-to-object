@@ -114,3 +114,24 @@ describe('parse', () => {
     assert.throws(throws);
   });
 });
+
+it('allows a repeated prop where the last occurrence has no value', () => {
+  const config = alternatingCaseToObject('AbA');
+
+  assert.deepEqual(config.a, ['b', null]);
+});
+
+it('allows a trailing null among values of a consistent type', () => {
+  const config = alternatingCaseToObject('LIST1LIST2LIST');
+
+  assert.deepEqual(config.list, [1, 2, null]);
+});
+
+it('still throws when non-null values have differing types', () => {
+  assert.throws(() => alternatingCaseToObject('LIST1LISTtwo'));
+  assert.throws(() => alternatingCaseToObject('AtrueAstr'));
+});
+
+it('still throws when differing types appear with a trailing null', () => {
+  assert.throws(() => alternatingCaseToObject('LIST1LISTtwoLIST'));
+});
