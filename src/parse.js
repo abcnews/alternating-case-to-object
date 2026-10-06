@@ -62,11 +62,10 @@ export default function parse(string, options = {}) {
         if (isArray) {
           const types = new Set(
 						allKeyValues
-							// A null value here indicates a trailing uppercase key
-							// with no value. Previous valueStr === "" and presumably
-							// non-intentional. typeof null === "object" so will
-							// throw when in a Set with other strings. Let's filter
-							// instead of throwing.
+							// A null means a trailing uppercase key with no value. `typeof null`
+              // is "object", so without filtering it reads as a type mismatch
+              // against any real value. A missing value shouldn't make an array
+              // inconsistent.
 							.filter((val) => val !== null)
 							.map((val) => typeof val)
           );
