@@ -90,6 +90,9 @@ parse('AtrueAstr');
 
 ### Options
 
+#### noTypeGuessing:Boolean
+Props in this array will be returned verbatim as strings.
+
 #### arrayProps:Array
 
 Props in this array will always be returned as arrays, even if they occur in the config string zero or one time.
